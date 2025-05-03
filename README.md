@@ -1,6 +1,6 @@
 - 👋 Hi, I’m Gavin
 - 👀 I’m interested in Homelab-ing and generally being a nerd
-- 🌱 I’m currently learning: Packer, Terraform, Ansible and K3s
+- 🌱 I’m currently learning: k8s, Linux, AI/LLM
 - 📫 How to reach me: gavin@nerdz.co.nz
 
 <!---
