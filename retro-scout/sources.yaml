@@ -405,8 +405,9 @@ pricecharting:
     PAL Sega Saturn: G97
     JP Sega Saturn: G67
 
-  # FETCH NOTE (verified 2026-07-17): PriceCharting 403s plain/datacenter
-  # fetchers — use the Firecrawl scrape tool, which renders the page fine.
+  # FETCH NOTE (verified 2026-07-17): the Claude environment's egress allowlist
+  # 403s direct fetches to pricecharting.com — use the Firecrawl scrape tool
+  # (connector), which fetches from Firecrawl's own infrastructure.
   # https://www.pricecharting.com/game/{pc_id} redirects to the canonical slug
   # URL. A redirect to /search-products means the URL/ID is WRONG — treat as
   # errored; never read Low/Mid/High prices off a search page.
