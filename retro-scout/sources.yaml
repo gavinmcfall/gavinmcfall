@@ -1,0 +1,425 @@
+# Retro Scout — source list
+# Companion to retro-game-sourcing-nz.md (read that for the WHY behind the tiering)
+# Refresh: quarterly. Shops close; fees change.
+#
+# tier      A = NZ domestic, B = Australia, C = US, D = marketplaces
+#           Search order is A -> B -> D -> C. Tier B outranks C because AU is PAL.
+# regions   What region stock this source sells. Match against wantlist.region.
+# gst       charged   = >NZ$60k/yr NZ sales, adds 15% at checkout
+#           none      = under the threshold, legitimately GST-free under NZ$1000
+#           unknown   = assume charged when estimating (conservative)
+# ships_nz  direct | forward | no | unknown
+# trust     Repro/authenticity confidence. Drives priority-1 ranking.
+#           high | medium | low | unverified
+
+meta:
+  version: 1
+  compiled: 2026-07-16
+  currency_note: >
+    All thresholds in the wantlist are NZD LANDED. Sources price in their own
+    currency. Always convert live — never from memory.
+
+# ---------------------------------------------------------------------------
+tier_a_nz:
+  - name: Mad Elf Games
+    url: https://madelfgames.co.nz/
+    tier: A
+    regions: [PAL]
+    gst: n/a-domestic
+    ships_nz: direct
+    trust: medium
+    notes: >
+      Auckland, family-run, collector-friendly. Free AKL shipping >$50,
+      NZ-wide >$99. Local to Karaka — possible pickup.
+
+  - name: Memory Lane Games
+    url: https://memorylanegames.co.nz/
+    tier: A
+    regions: [PAL]
+    gst: n/a-domestic
+    ships_nz: direct
+    trust: medium
+    notes: Free shipping >$159. Has a make-an-offer flow — worth using on grails.
+
+  - name: Respect Retro Gaming
+    url: https://www.respectretrogaming.co.nz/
+    tier: A
+    regions: [PAL]
+    gst: n/a-domestic
+    ships_nz: direct
+    trust: medium
+    notes: Buy/sell/trade. Also anime, guides, boxed items.
+
+  - name: TradeMe
+    url: https://www.trademe.co.nz/
+    tier: A
+    regions: [PAL, NTSC-J, NTSC-U]
+    gst: n/a-domestic
+    ships_nz: direct
+    trust: low
+    notes: >
+      Deepest NZ second-hand pool, but private sellers = highest repro risk in
+      Tier A. Never auto-recommend a TradeMe hit above priority=medium without
+      a clear photo of the cart label and PCB.
+
+  - name: Mighty Ape
+    url: https://www.mightyape.co.nz/games/retro-legacy-gaming/all
+    tier: A
+    regions: [PAL]
+    gst: n/a-domestic
+    ships_nz: direct
+    trust: medium
+    notes: Mainstream pricing. Thin retro range.
+
+  - name: Techexpress
+    url: https://www.techexpress.co.nz/collections/gaming
+    tier: A
+    regions: [PAL]
+    gst: n/a-domestic
+    ships_nz: direct
+    trust: high
+    games: false
+    notes: >
+      NOT a games source — parts, tools, accessories, repair. All stock in NZ,
+      explicitly no drop-shipping. Best NZ source for restoration bits.
+      Exclude from wantlist searches; keep for hardware.
+
+  - name: NZGameShop
+    url: https://nzgameshop.com/retro-gaming
+    tier: A
+    regions: [PAL]
+    gst: n/a-domestic
+    ships_nz: direct
+    trust: medium
+    notes: ~$1.99 delivery. Very thin retro range (~156 items).
+
+# ---------------------------------------------------------------------------
+# Tier B is the primary hunting ground. AU is PAL = plugs into stock NZ kit.
+tier_b_au:
+  - name: Retro Sales
+    url: https://retrosales.com.au/
+    tier: B
+    regions: [PAL, NTSC-J]
+    gst: unknown
+    ships_nz: direct
+    trust: high
+    primary: true
+    grading: [Good, Very Good, Excellent]
+    notes: >
+      TOP PICK. Melbourne, ~15,000 items. Ships worldwide via Australia Post,
+      7-16 days. Free shipping over $100. Grades every game Good/Very Good/
+      Excellent with published definitions — the only source here with a
+      machine-readable condition signal. Also runs a console repair shop
+      (PixelFX-endorsed) and sells spare parts/PSUs. Can special-order from
+      Japanese distributors on request — an English-speaking route into JP
+      stock without proxy plumbing.
+
+  - name: Fully Retro
+    url: https://www.fullyretro.com/
+    tier: B
+    regions: [PAL]
+    gst: unknown
+    ships_nz: direct
+    trust: high
+    notes: >
+      FREE shipping to NZ (some large consoles now carry freight). Explicit
+      anti-piracy / 100% authentic stance. States games are compatible with
+      Australian systems = NZ systems. Positioned as premium — Retro Sales
+      runs a landing page targeting their pricing. Free freight can still win
+      on a single cart. Always price-check against Retro Sales.
+
+  - name: Retro Unit
+    url: https://retrounit.com.au/
+    tier: B
+    regions: [PAL]
+    gst: unknown
+    ships_nz: direct
+    trust: medium
+    notes: Ships worldwide, 30-day guarantee. Games are only part of a wider catalogue.
+
+  - name: The Gamesmen
+    url: https://www.gamesmen.com.au/retro
+    tier: B
+    regions: [PAL]
+    gst: unknown
+    ships_nz: unknown
+    trust: high
+    notes: >
+      Sydney, founded 1982, first AU retailer online (1996). In-store Retro
+      Video Game Museum. Deep institutional legitimacy = very low repro risk.
+      ACTION: confirm NZ shipping by email.
+
+  - name: Super Retro
+    url: https://superretro.com.au/
+    tier: B
+    regions: [PAL, NTSC-J]
+    gst: unknown
+    ships_nz: unknown
+    trust: medium
+    notes: >
+      Physical store + online. Has an International Games & Consoles category
+      (JP stock held locally = no proxy needed). Does repairs.
+      ACTION: confirm NZ shipping.
+
+  - name: Sydney Retro
+    url: https://sydneyretro.com.au/
+    tier: B
+    regions: [PAL, NTSC-J]
+    gst: none
+    ships_nz: forward
+    trust: medium
+    notes: >
+      AU-only shipping (stated). One-person operation, cleans and tests
+      everything. Stocks JP imports. Small enough to be certainly GST-free.
+      ACTION: email — a solo operator will likely post to NZ if asked.
+
+  - name: The Game Experts
+    url: https://thegameexperts.com.au/
+    tier: B
+    regions: [PAL]
+    gst: unknown
+    ships_nz: unknown
+    trust: unverified
+    notes: Thin information available. Verify before trusting.
+
+# ---------------------------------------------------------------------------
+# Tier C only fires when wantlist.region is NTSC-U or ANY-with-modded-hardware.
+tier_c_us:
+  - name: Lukie Games
+    url: https://www.lukiegames.com/
+    tier: C
+    regions: [NTSC-U]
+    gst: none
+    ships_nz: direct
+    trust: high
+    notes: >
+      FL. Huge selection incl. obscure systems (NeoGeo, Vectrex, Jaguar,
+      ColecoVision). Tests every game, 90-day returns. Generally better value
+      than DKOldies. Preferred US default.
+
+  - name: DKOldies
+    url: https://www.dkoldies.com/
+    tier: C
+    regions: [NTSC-U]
+    gst: none
+    ships_nz: direct
+    trust: medium
+    notes: >
+      PA, since 2003. Heavy authenticity marketing, staff technician, 1-year
+      warranty. BUT widely regarded as expensive — a rival eBay store's blurb
+      literally reads "My prices are cheaper than DKOldies!". Long-standing
+      collector criticism re: aftermarket parts in "refurbished" consoles —
+      UNVERIFIED, treat as a flag not a verdict. Always price-check vs Lukie.
+
+  - name: eStarland
+    url: https://www.estarland.com/
+    tier: C
+    regions: [NTSC-U]
+    gst: none
+    ships_nz: unknown
+    trust: medium
+    notes: VA. Long-running. Verify NZ shipping.
+
+  - name: Game Over Videogames
+    url: https://www.gameovervideogames.com/
+    tier: C
+    regions: [NTSC-U]
+    gst: none
+    ships_nz: unknown
+    trust: medium
+    notes: TX chain. Games plus merch, buy-back program.
+
+  - name: Retro Island Gaming
+    url: https://retroislandny.com/
+    tier: C
+    regions: [NTSC-U]
+    gst: none
+    ships_nz: forward
+    trust: medium
+    notes: >
+      NY. Daily new inventory. Buy-2-get-1 on games under $15 — good basket
+      filler. US-only free shipping >$200 = freight-forward candidate.
+
+  # Roundup-sourced only. Not verified for NZ shipping or authenticity policy.
+  - name: Level Up Video Games
+    tier: C
+    regions: [NTSC-U]
+    trust: unverified
+    ships_nz: unknown
+  - name: Cap'n Games
+    tier: C
+    regions: [NTSC-U]
+    trust: unverified
+    ships_nz: unknown
+  - name: Fair Game
+    tier: C
+    regions: [NTSC-U]
+    trust: unverified
+    ships_nz: unknown
+
+# ---------------------------------------------------------------------------
+tier_d_marketplaces:
+  - name: eBay AU
+    url: https://www.ebay.com.au/
+    tier: D
+    regions: [PAL]
+    gst: charged
+    ships_nz: direct
+    trust: low
+    notes: >
+      AU sellers often post to NZ directly and cheaply, dodging eIS entirely.
+      Best marketplace for PAL stock. Seller feedback is the only authenticity
+      signal — weight it heavily.
+
+  - name: eBay US/UK
+    url: https://www.ebay.com/
+    tier: D
+    regions: [NTSC-U, PAL]
+    gst: charged
+    ships_nz: direct
+    trust: low
+    notes: >
+      eBay International Shipping (eIS) is convenient but widely criticised as
+      expensive — one seller reported their own $5 postage became ~$20 for the
+      buyer via the hub. NZ reports are mixed (a Geekzone user paid ~NZ$32 for
+      a >5kg item, less than half other quotes). ALWAYS compare eIS against
+      seller-direct post, and against forwarding to a US address.
+
+  - name: Yahoo Auctions JP
+    url: https://auctions.yahoo.co.jp/
+    tier: D
+    regions: [NTSC-J]
+    gst: none
+    ships_nz: forward
+    proxy_required: true
+    trust: medium
+    notes: >
+      Deepest retro pool on earth. Auction close times are brutal from NZ —
+      automated sniping (Buyee) matters. Repro rate on JP-domestic stock is
+      structurally lower than Western markets.
+
+  - name: Mercari JP
+    url: https://jp.mercari.com/
+    tier: D
+    regions: [NTSC-J]
+    gst: none
+    ships_nz: forward
+    proxy_required: true
+    trust: medium
+    notes: >
+      Use mercari.jp (domestic), NOT mercari.com — the selection is far deeper.
+      Buyee has a native "Buy with Buyee" flow here.
+
+  - name: Suruga-ya
+    url: https://www.suruga-ya.jp/
+    tier: D
+    regions: [NTSC-J]
+    gst: none
+    ships_nz: forward
+    proxy_required: true
+    trust: medium
+    notes: Japanese second-hand chain. Deep retro catalogue.
+
+# ---------------------------------------------------------------------------
+plumbing:
+  japan_proxies:
+    # Fee STRUCTURE is durable. Exact yen figures are NOT — sources actively
+    # contradict each other (ZenMarket quoted at both Y300 and Y500/item;
+    # Neokyo at Y250, Y300 AND Y350, all within 2026 sources).
+    # ALWAYS confirm live rates before a large order.
+    - name: ZenMarket
+      model: flat ~Y300/item
+      consolidation: free
+      storage_days: 45-60
+      best_for: Multi-item hauls; mid-to-high value. Flat fee wins as price rises.
+    - name: Buyee
+      model: ~5-6% + flat
+      consolidation: ~Y500
+      best_for: >
+        Yahoo Auctions sniping (auto-bid). Official Mercari/Yahoo/Rakuma
+        partnerships. Percentage overtakes ZenMarket's flat fee around
+        Y5,000-6,000/item. Does NOT support Amazon JP.
+    - name: FROM JAPAN
+      model: flat ~Y250 + 5% consolidation
+      best_for: Amazon JP; mid-high value single items.
+    - name: Sendico
+      storage_days: 90
+      best_for: Longest storage — slow-building hauls.
+    - name: Neokyo
+      model: flat (~Y250-350, disputed)
+      best_for: EU-optimised rates — LESS RELEVANT FOR NZ. Manual auction bidding = slow.
+
+  forwarders:
+    - name: NZ Post You Shop
+      url: https://www.nzpost.co.nz/tools/you-shop
+      addresses: [US, UK]
+      warning: >
+        NZ$55 incl GST per parcel tariff classification fee on parcels valued
+        NZ$400-1000. THIS IS THE $400 CEILING. Also aggregates multiple <$400
+        parcels sent simultaneously to the same address — deliberate splitting
+        can backfire.
+      volumetric: L*W*H / 5000
+    - name: Stackry
+      url: https://www.stackry.com/
+      addresses: [US]
+      notes: >
+        Warehouse in a tax-free US state — saves ~7.5% US sales tax, which
+        STACKS with the GST saving from Rule 1. Consolidation, de-boxing to cut
+        volumetric weight, 45 days free storage. Claims up to 80% freight saving.
+        DE-BOXING WARNING: fine for loose carts, destroys value on CIB.
+    - name: Forward2Me
+      addresses: [UK]
+      trust: unverified
+      notes: Relevant once the UK (PAL) pass is done.
+
+# ---------------------------------------------------------------------------
+pricecharting:
+  # API REJECTED: paywalled at US$49/mo (~NZ$1,000/yr) to save ~40 min/yr of typing.
+  # market_usd is cached in the wantlist sheet, refreshed by hand quarterly.
+  # Do NOT scrape product pages on a schedule — that's what the paid tier sells.
+  base_url: https://www.pricecharting.com
+  refresh_cadence_days: 90
+  stale_warning_days: 120
+  currency: USD
+
+  # Which price to read off the page for each condition value
+  condition_to_price_label:
+    loose: Loose Price
+    cib: Complete Price
+    box_only: Box Only Price
+    sealed: New Price
+    boxed: Item & Box          # web page only; shown in the full price guide table
+
+  # PriceCharting console IDs — useful for building refresh URLs
+  console_ids:
+    PAL GameBoy: G73
+    PAL GameBoy Color: G77
+    PAL GameBoy Advance: G80
+    PAL Nintendo DS: G78
+    PAL Nintendo 3DS: G94
+    JP GameBoy: G112
+    Super Nintendo: G13
+    PAL Super Nintendo: G61
+    PAL Sega Mega Drive: G71
+    JP Sega Mega Drive: G105
+    PAL Sega Saturn: G97
+    JP Sega Saturn: G67
+
+  # Known product IDs (verified 2026-07-17)
+  known_ids:
+    pk-red: 46793      # Pokemon Red, PAL GameBoy — CIB US$128.48
+    pk-gold: 50514     # Pokemon Gold, PAL GameBoy Color — CIB US$204.15
+    pk-emerald: 56230  # Pokemon Emerald, PAL GameBoy Advance — CIB US$417.89
+
+# ---------------------------------------------------------------------------
+# Hard-coded border rules. See retro-game-sourcing-nz.md sections Rule 1-3.
+border_rules:
+  gst_rate: 0.15
+  gst_registration_threshold_nzd: 60000   # seller's annual NZ sales
+  lvg_levy_nzd_air: 2.21                  # + GST, per consignment, from 2026-04-01
+  lvg_levy_nzd_sea: 2.09                  # + GST
+  youshop_tariff_classification_nzd: 55   # incl GST, on parcels NZ$400-1000
+  youshop_fee_band_nzd: [400, 1000]
+  high_value_threshold_nzd: 1000
+  high_value_levy_nzd_air: 51.81          # + GST + duty, on top
+  target_parcel_ceiling_nzd: 400          # THE operating number

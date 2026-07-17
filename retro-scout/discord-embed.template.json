@@ -1,0 +1,221 @@
+{
+  "_README": {
+    "purpose": "Discord webhook/bot payload templates for Retro Scout hits.",
+    "placeholders": "{{double_brace}} tokens are substituted at send time. Any token left unsubstituted MUST abort the send — never post a literal {{...}} to Discord.",
+    "variants": [
+      "hit          — normal wantlist match under threshold",
+      "grail_over   — priority=grail match ABOVE threshold (alert anyway)",
+      "basket       — consolidation basket approaching the NZ$400 ceiling",
+      "digest_empty — weekly run found nothing (send so silence != failure)"
+    ],
+    "colour_key": {
+      "2ECC71": "green  — landed <80% of threshold",
+      "F1C40F": "amber  — landed 80-100% of threshold",
+      "9B59B6": "purple — grail, over threshold",
+      "E67E22": "orange — basket warning",
+      "95A5A6": "grey   — empty digest / informational"
+    },
+    "discord_limits": {
+      "embeds_per_message": 10,
+      "fields_per_embed": 25,
+      "field_name": 256,
+      "field_value": 1024,
+      "title": 256,
+      "description": 4096,
+      "footer_text": 2048,
+      "buttons_per_action_row": 5,
+      "action_rows_per_message": 5,
+      "custom_id": 100,
+      "total_embed_chars": 6000
+    },
+    "custom_id_scheme": "rs:<action>:<wantlist_id>  — matches your existing bot's action+id encoding. 'rs' namespace prevents collisions with the Game Scout bot if they share a client.",
+    "ack_warning": "Your ~3s interaction acknowledge deadline is the known flakiness source. Every button here must deferUpdate() FIRST, then do work. Never do a DB/API call before acking.",
+    "batching": "Max 10 embeds per message, but cap at 5 per message in practice — mobile (Serina-class) rendering degrades badly past that. Paginate the digest instead."
+  },
+
+  "hit": {
+    "content": null,
+    "embeds": [
+      {
+        "title": "{{title}} — {{console_display}} ({{region}})",
+        "url": "{{listing_url}}",
+        "color": "{{colour_int}}",
+        "description": "{{condition_display}} · **{{landed_nzd}} NZD landed** _(est.)_\n{{threshold_bar}} {{pct_of_threshold}}% of your {{max_nzd_landed}} threshold",
+        "thumbnail": { "url": "{{listing_image_url}}" },
+        "fields": [
+          {
+            "name": "Price",
+            "value": "{{price_native}} {{currency}}\n`{{fx_rate}}` @ {{fx_date}}",
+            "inline": true
+          },
+          {
+            "name": "Landed estimate",
+            "value": "**{{landed_nzd}} NZD**\n{{landed_breakdown}}",
+            "inline": true
+          },
+          {
+            "name": "Headroom",
+            "value": "{{headroom_nzd}} NZD under",
+            "inline": true
+          },
+          {
+            "name": "Source",
+            "value": "{{source_name}}\nTier {{tier}} · trust: {{trust}}",
+            "inline": true
+          },
+          {
+            "name": "Condition",
+            "value": "{{condition_raw}}{{grading_note}}",
+            "inline": true
+          },
+          {
+            "name": "Plays on stock NZ kit?",
+            "value": "{{region_verdict}}",
+            "inline": true
+          },
+          {
+            "name": "⚠️ Checks before buying",
+            "value": "{{caveats}}",
+            "inline": false
+          }
+        ],
+        "footer": {
+          "text": "Retro Scout · {{wantlist_id}} · priority: {{priority}} · landed est. assumes ships alone — consolidating lowers it"
+        },
+        "timestamp": "{{iso8601_now}}"
+      }
+    ],
+    "components": [
+      {
+        "type": 1,
+        "components": [
+          {
+            "type": 2,
+            "style": 5,
+            "label": "Open listing",
+            "url": "{{listing_url}}"
+          },
+          {
+            "type": 2,
+            "style": 3,
+            "label": "Add to basket",
+            "custom_id": "rs:basket:{{wantlist_id}}",
+            "emoji": { "name": "📦" }
+          },
+          {
+            "type": 2,
+            "style": 2,
+            "label": "Snooze 30d",
+            "custom_id": "rs:snooze:{{wantlist_id}}",
+            "emoji": { "name": "💤" }
+          },
+          {
+            "type": 2,
+            "style": 1,
+            "label": "Mark acquired",
+            "custom_id": "rs:acquired:{{wantlist_id}}",
+            "emoji": { "name": "✅" }
+          },
+          {
+            "type": 2,
+            "style": 4,
+            "label": "Repro / reject",
+            "custom_id": "rs:reject:{{wantlist_id}}",
+            "emoji": { "name": "🚫" }
+          }
+        ]
+      }
+    ]
+  },
+
+  "grail_over": {
+    "content": "🏆 **Grail sighting** — over threshold, flagging anyway.",
+    "embeds": [
+      {
+        "title": "{{title}} — {{console_display}} ({{region}})",
+        "url": "{{listing_url}}",
+        "color": 10181046,
+        "description": "**{{landed_nzd}} NZD landed** _(est.)_ — that's **{{over_by_nzd}} NZD OVER** your {{max_nzd_landed}} threshold.\n\nSent because `priority=grail`. Your call.",
+        "thumbnail": { "url": "{{listing_image_url}}" },
+        "fields": [
+          { "name": "Price", "value": "{{price_native}} {{currency}}", "inline": true },
+          { "name": "Landed estimate", "value": "**{{landed_nzd}} NZD**\n{{landed_breakdown}}", "inline": true },
+          { "name": "Over by", "value": "**+{{over_by_nzd}} NZD** ({{pct_of_threshold}}%)", "inline": true },
+          { "name": "Source", "value": "{{source_name}}\nTier {{tier}} · trust: {{trust}}", "inline": true },
+          { "name": "Condition", "value": "{{condition_raw}}{{grading_note}}", "inline": true },
+          { "name": "Plays on stock NZ kit?", "value": "{{region_verdict}}", "inline": true },
+          { "name": "Why it might still be worth it", "value": "{{rarity_note}}", "inline": false },
+          { "name": "⚠️ Checks before buying", "value": "{{caveats}}", "inline": false }
+        ],
+        "footer": { "text": "Retro Scout · {{wantlist_id}} · GRAIL · raise threshold in the wantlist sheet to stop over-budget alerts" },
+        "timestamp": "{{iso8601_now}}"
+      }
+    ],
+    "components": [
+      {
+        "type": 1,
+        "components": [
+          { "type": 2, "style": 5, "label": "Open listing", "url": "{{listing_url}}" },
+          { "type": 2, "style": 3, "label": "Add to basket", "custom_id": "rs:basket:{{wantlist_id}}", "emoji": { "name": "📦" } },
+          { "type": 2, "style": 2, "label": "Raise threshold", "custom_id": "rs:raise:{{wantlist_id}}", "emoji": { "name": "📈" } },
+          { "type": 2, "style": 2, "label": "Snooze 30d", "custom_id": "rs:snooze:{{wantlist_id}}", "emoji": { "name": "💤" } },
+          { "type": 2, "style": 4, "label": "Repro / reject", "custom_id": "rs:reject:{{wantlist_id}}", "emoji": { "name": "🚫" } }
+        ]
+      }
+    ]
+  },
+
+  "basket": {
+    "content": null,
+    "embeds": [
+      {
+        "title": "📦 Consolidation basket — {{basket_source}}",
+        "color": 15105570,
+        "description": "**{{basket_total_nzd}} / 400 NZD**\n{{basket_bar}}\n\n{{basket_verdict}}",
+        "fields": [
+          { "name": "Items", "value": "{{basket_items}}", "inline": false },
+          {
+            "name": "Why 400, not 1000",
+            "value": "You Shop charges **NZ$55/parcel** tariff classification in the $400–1,000 band. Above $1,000: 15% GST + duty + ~$51.81 high-value levy. The band under $400 is free of all three.",
+            "inline": false
+          },
+          {
+            "name": "Aggregation warning",
+            "value": "Consignments from the **same supplier arriving the same day** are combined by Customs. Don't split into two $350 parcels and ship them together — that's one $700 parcel with a $55 fee.",
+            "inline": false
+          }
+        ],
+        "footer": { "text": "Retro Scout · basket · ship before it crosses 400" },
+        "timestamp": "{{iso8601_now}}"
+      }
+    ],
+    "components": [
+      {
+        "type": 1,
+        "components": [
+          { "type": 2, "style": 3, "label": "Ship it now", "custom_id": "rs:ship:{{basket_id}}", "emoji": { "name": "🚀" } },
+          { "type": 2, "style": 2, "label": "Keep adding", "custom_id": "rs:hold:{{basket_id}}" },
+          { "type": 2, "style": 4, "label": "Clear basket", "custom_id": "rs:clear:{{basket_id}}" }
+        ]
+      }
+    ]
+  },
+
+  "digest_empty": {
+    "content": null,
+    "embeds": [
+      {
+        "title": "Retro Scout — nothing this week",
+        "color": 9807270,
+        "description": "Checked **{{sources_checked}}** sources against **{{active_items}}** active wantlist items. No hits under threshold.",
+        "fields": [
+          { "name": "Closest miss", "value": "{{closest_miss}}", "inline": false },
+          { "name": "Basket", "value": "{{basket_total_nzd}} / 400 NZD", "inline": true },
+          { "name": "Sources that errored", "value": "{{failed_sources}}", "inline": true }
+        ],
+        "footer": { "text": "Retro Scout · silence is a result, not a failure" },
+        "timestamp": "{{iso8601_now}}"
+      }
+    ]
+  }
+}
