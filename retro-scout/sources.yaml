@@ -439,6 +439,14 @@ pricecharting:
     pk-black2: 33361     # Pokemon Black Version 2, Nintendo DS (US) — CIB US$187.48
     pk-white2: 33362     # Pokemon White Version 2, Nintendo DS (US) — CIB US$195.37
     pk-ultramoon: 70591  # Pokemon Ultra Moon, PAL Nintendo 3DS — CIB US$56.48
+    # Box-only hunts — Gavin owns the cart, wants the box (like pk-blue/pk-yellow)
+    pk-x: 70588          # Pokemon X, PAL Nintendo 3DS — Box Only US$11.66
+    pk-y: 66843          # Pokemon Y, PAL Nintendo 3DS — Box Only US$19.16
+    pk-omegaruby: 70593  # Pokemon Omega Ruby, PAL Nintendo 3DS — Box Only US$13.86
+    pk-alphasapphire: 70592 # Pokemon Alpha Sapphire, PAL Nintendo 3DS — Box Only US$21.14
+    pk-sun: 66842        # Pokemon Sun, PAL Nintendo 3DS — Box Only US$12.20
+    pk-moon: 156200      # Pokemon Moon, PAL Nintendo 3DS — Box Only US$5.25
+    pk-ultrasun: 70594   # Pokemon Ultra Sun, PAL Nintendo 3DS — Box Only US$18.47
 
 # ---------------------------------------------------------------------------
 # Hard-coded border rules. See retro-game-sourcing-nz.md sections Rule 1-3.
