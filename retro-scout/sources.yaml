@@ -405,11 +405,40 @@ pricecharting:
     PAL Sega Saturn: G97
     JP Sega Saturn: G67
 
-  # Known product IDs (verified 2026-07-17)
+  # FETCH NOTE (verified 2026-07-17): PriceCharting 403s plain/datacenter
+  # fetchers — use the Firecrawl scrape tool, which renders the page fine.
+  # https://www.pricecharting.com/game/{pc_id} redirects to the canonical slug
+  # URL. A redirect to /search-products means the URL/ID is WRONG — treat as
+  # errored; never read Low/Mid/High prices off a search page.
+
+  # Known product IDs — all 22 wantlist rows, resolved live 2026-07-17.
+  # Prices below are the value for the row's WANTED condition (cib → Complete,
+  # box_only → Box Only), snapshot only — always confirm live at Tier 2.
+  # DS rows (region ANY) are cached against the US "Nintendo DS" product —
+  # match the listing's actual region to the right product when confirming.
   known_ids:
-    pk-red: 46793      # Pokemon Red, PAL GameBoy — CIB US$128.48
-    pk-gold: 50514     # Pokemon Gold, PAL GameBoy Color — CIB US$204.15
-    pk-emerald: 56230  # Pokemon Emerald, PAL GameBoy Advance — CIB US$417.89
+    pk-red: 46793        # Pokemon Red, PAL GameBoy — CIB US$206.20
+    pk-blue: 46792       # Pokemon Blue, PAL GameBoy — Box Only US$58.50
+    pk-yellow: 46794     # Pokemon Yellow, PAL GameBoy — Box Only US$80.57
+    pk-green: 65449      # Pokemon Green, JP GameBoy — CIB US$110.00
+    pk-gold: 50514       # Pokemon Gold, PAL GameBoy Color — CIB US$204.15
+    pk-silver: 50517     # Pokemon Silver, PAL GameBoy Color — CIB US$242.45
+    pk-crystal: 50513    # Pokemon Crystal, PAL GameBoy Color — CIB US$503.96
+    pk-ruby: 56601       # Pokemon Ruby, PAL GameBoy Advance — CIB US$154.45
+    pk-sapphire: 56232   # Pokemon Sapphire, PAL GameBoy Advance — CIB US$195.39
+    pk-firered: 56600    # Pokemon FireRed, PAL GameBoy Advance — CIB US$239.95
+    pk-leafgreen: 56219  # Pokemon LeafGreen, PAL GameBoy Advance — CIB US$276.37
+    pk-emerald: 56230    # Pokemon Emerald, PAL GameBoy Advance — CIB US$425.53
+    pk-diamond: 4122     # Pokemon Diamond, Nintendo DS (US) — CIB US$75.00
+    pk-pearl: 4124       # Pokemon Pearl, Nintendo DS (US) — CIB US$80.50
+    pk-platinum: 16468   # Pokemon Platinum, Nintendo DS (US) — CIB US$224.99
+    pk-heartgold: 21071  # Pokemon HeartGold, Nintendo DS (US) — CIB US$228.75 (CIB incl. Pokewalker)
+    pk-soulsilver: 21072 # Pokemon SoulSilver, Nintendo DS (US) — CIB US$235.00 (CIB incl. Pokewalker)
+    pk-black: 31034      # Pokemon Black, Nintendo DS (US) — CIB US$118.27
+    pk-white: 31035      # Pokemon White, Nintendo DS (US) — CIB US$100.00
+    pk-black2: 33361     # Pokemon Black Version 2, Nintendo DS (US) — CIB US$187.48
+    pk-white2: 33362     # Pokemon White Version 2, Nintendo DS (US) — CIB US$195.37
+    pk-ultramoon: 70591  # Pokemon Ultra Moon, PAL Nintendo 3DS — CIB US$56.48
 
 # ---------------------------------------------------------------------------
 # Hard-coded border rules. See retro-game-sourcing-nz.md sections Rule 1-3.

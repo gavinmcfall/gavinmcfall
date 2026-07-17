@@ -173,8 +173,14 @@ added to the sheet.
 **This is the number the alert is based on.**
 
 Typically 1–3 fetches per run. The pages are public and need no login; prices are
-server-rendered into the HTML, so a plain fetch gets them. There is no internal price
-API to call — verified 2026-07-17 from a logged-out HAR capture showing no price XHR.
+server-rendered into the HTML. There is no internal price API to call — verified
+2026-07-17 from a logged-out HAR capture showing no price XHR.
+**Fetch via the Firecrawl scrape tool** — PriceCharting returns HTTP 403 to plain
+fetchers from this environment (verified 2026-07-17; Firecrawl renders it fine).
+If a product URL redirects to `/search-products`, the URL or ID is wrong — treat
+the row as errored. Never read prices off a search results page: it mixes in
+Pokémon TCG cards (e.g. the "Silver Tempest" set) and its Low/Mid/High numbers
+are not the price-guide values.
 
 If a run exceeds ~10 fetches, **stop and report** — that means the Tier 1 filter is
 broken, not that a lot of deals appeared at once.
